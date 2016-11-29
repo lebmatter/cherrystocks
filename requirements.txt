@@ -1,0 +1,6 @@
+CherryPy==8.1.2
+pypiwin32==219
+redis==2.10.5
+requests==2.12.1
+six==1.10.0
+webencodings==0.5
