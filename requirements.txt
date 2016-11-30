@@ -3,7 +3,6 @@ billiard==3.5.0.2
 CherryPy==8.1.2
 huey==1.2.2
 kombu==4.0.0
-pypiwin32==219
 pytz==2016.7
 redis==2.10.5
 requests==2.12.1
