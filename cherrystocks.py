@@ -3,6 +3,7 @@ import os
 from niftyredis import get_or_update
 import json
 import datetime
+from cherrypy.process.plugins import Daemonizer
 
 
 class CherryStocks(object):
@@ -42,4 +43,6 @@ if __name__ == '__main__':
                        })
     webapp = CherryStocks()
     webapp.niftyfifty = CherryStocksWebService()
+    d = Daemonizer(cherrypy.engine)
+    d.subscribe()
     cherrypy.quickstart(webapp, '/', conf)
