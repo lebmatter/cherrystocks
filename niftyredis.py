@@ -27,7 +27,7 @@ def get_or_update(gainers=True):
             entry_key = '{}:{}:{}'.format(tstamp_key, tstamp, entry['symbol'])
             r.hmset(
                 entry_key, {
-                    'symbol': entry_key,
+                    'symbol': entry['symbol'],
                     'openPrice': entry['openPrice'],
                     'highPrice': entry['highPrice'],
                     'lowPrice': entry['lowPrice'],
