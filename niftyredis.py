@@ -38,13 +38,14 @@ def get_or_update():
                     'turnoverInLakhs': entry['turnoverInLakhs']})
 
             r.expire(entry_key, 300)
+        print "Data from Crawling."
         return data['data']
     elif 'tstamp' in keys:
-        last_tstamp = r.get('tstamp')
         entry_keys = keys.remove('tstamp')
         data = []
         for entry_key in entry_keys:
             data.append(r.hgetall(entry_key))
+        print "Data from Redis Cache"
         return data
 
 
