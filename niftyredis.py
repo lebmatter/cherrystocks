@@ -14,8 +14,7 @@ def get_or_update():
     2) If key is found:
         get data from cache with timestamp Key
     '''
-    keys = r.keys()
-    if not keys:
+    if not r.exists('tstamp'):
         # empty keys means cache has cleared.
         data = get_niftyfifty()
         tstamp = datetime.datetime.strptime(data['time'], "%b %d, %Y %H:%M:%S")
@@ -40,8 +39,10 @@ def get_or_update():
             r.expire(entry_key, 300)
         print "Data from Crawling."
         return data['data']
-    elif 'tstamp' in keys:
-        entry_keys = keys.remove('tstamp')
+    else:
+        last_tstamp = r.get('tstamp')
+        entry_keys = r.keys('{}*'.format(last_tstamp))
+        print 'Current keys in cahce are: ', entry_keys
         data = []
         for entry_key in entry_keys:
             data.append(r.hgetall(entry_key))
