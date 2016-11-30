@@ -1,9 +1,126 @@
 body {
   background-color: #5E819F;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+#page-wrap {
+   width:90%;
+   margin:0 auto;
+}
+#sidebar {
+   float:left;
+   width:20%;
+}
+#main {
+  float: right;
+   width:80%;
+}
+
+#topdiv {
+  font-family: 'Open Sans', sans-serif;
+}
+#topdiv h2{
+  color: white;
+  font-size: 2em;
+}
+#topdiv h3{
+  color: white;
+  font-size: 1.5em;
+}
+#pagetitle {
+text-align: right;
+width: 300px;
+}
+
+#pagemenu {
+float: right;
+}
+
+#cardwrap {
+  /*padding: 0;
+  margin: 0;*/
+  list-style: none;
+  display: flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  -webkit-flex-flow: row wrap;
+  justify-content: center;
+  /*height: 300px;*/
+}
+
 .card {
-    background-color: white;
+  /*padding: 10px;*/
+  width: 300px;
+  height: 250px;
+  margin: 15px;
+  font-family: 'Open Sans', sans-serif;
 }
-.container {
-    padding: 2px 16px;
+
+.card-top {
+  display: flex;
+  padding: 0px;
+  background: white;
+  color: #F8A23E;
+  font-weight: bold;
+  font-size: 2em;
+  height: 100px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  /* flex center content */
+  justify-content: center;
+  align-items: center;
+}
+
+.card-footer {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  background: #ededed;
+  border-top: 1px solid silver;
+  height: 60px;
+  line-height: 20px;
+  padding: 10px;
+}
+
+.card-footer-div {
+  padding: 10px;
+  width: 150px;
+}
+
+.card-footer2 {
+  padding: 10px;
+  height: 40px;
+  background: #ededed;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  text-align: center;
+  font-weight: regular;
+  font-size: 0.8em;
+}
+
+.valtext {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  font-size: 0.8em;
+  /*padding: 10px;*/
+}
+
+.netprice {
+  font-weight: bold;
+  font-size: 2em;
+  float: right;
+  /*padding: 10px;*/
+}
+.gtype {
+  cursor: pointer;
+}
+.gainers {
+  color: #7dc133;
+}
+.losers {
+color : #FF6672;
 }
