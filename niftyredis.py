@@ -41,7 +41,7 @@ def get_or_update():
         return data['data']
     elif 'tstamp' in keys:
         last_tstamp = r.get('tstamp')
-        entry_keys = keys.remove(last_tstamp)
+        entry_keys = keys.remove('tstamp')
         data = []
         for entry_key in entry_keys:
             data.append(r.hgetall(entry_key))
