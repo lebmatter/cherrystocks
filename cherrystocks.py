@@ -1,6 +1,7 @@
 import cherrypy
 import os
 from niftyredis import get_or_update
+import json
 
 
 class CherryStocks(object):
@@ -14,7 +15,7 @@ class CherryStocksWebService(object):
     @cherrypy.tools.accept(media='text/plain')
     def GET(self):
         data = get_or_update()
-        return data
+        return json.dumps(data)
 
 
 if __name__ == '__main__':
