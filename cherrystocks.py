@@ -2,6 +2,7 @@ import cherrypy
 import os
 from niftyredis import get_or_update
 import json
+import datetime
 
 
 class CherryStocks(object):
@@ -16,6 +17,7 @@ class CherryStocksWebService(object):
     def GET(self, type='gainers'):
         g = True if type == 'gainers' else False
         tstamp, data = get_or_update(g)
+        tstamp = datetime.datetime.fromtimestamp(tstamp).strftime('%Y-%b-%d %H:%M:%S')
         return json.dumps({'data': data, 'tstamp': tstamp})
 
 
