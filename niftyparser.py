@@ -1,6 +1,7 @@
 import requests
 import json
 
+
 def get_niftyfifty(gainers=True):
     '''
     I wanted to use BeutifulSoup at first. But it won't parse dynamic data.

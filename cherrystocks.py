@@ -6,9 +6,11 @@ import datetime
 
 
 class CherryStocks(object):
+
     @cherrypy.expose
     def index(self):
         return open('index.html')
+
 
 @cherrypy.expose
 class CherryStocksWebService(object):
@@ -17,7 +19,8 @@ class CherryStocksWebService(object):
     def GET(self, type='gainers'):
         g = True if type == 'gainers' else False
         tstamp, data = get_or_update(g)
-        tstamp = datetime.datetime.fromtimestamp(float(tstamp)).strftime('%Y-%b-%d %H:%M:%S')
+        tstamp = datetime.datetime.fromtimestamp(
+            float(tstamp)).strftime('%Y-%b-%d %H:%M:%S')
         return json.dumps({'data': data, 'tstamp': tstamp})
 
 
@@ -38,8 +41,8 @@ if __name__ == '__main__':
     }
 
     cherrypy.config.update({'server.socket_host': '0.0.0.0',
-                        'server.socket_port': 8080,
-                       })
+                            'server.socket_port': 8080,
+                            })
     webapp = CherryStocks()
     webapp.niftyfifty = CherryStocksWebService()
     cherrypy.quickstart(webapp, '/', conf)

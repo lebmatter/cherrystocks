@@ -5,6 +5,7 @@ import time
 
 r = redis.Redis(host='localhost', port=6379, db=0)
 
+
 def get_or_update(gainers=True):
     '''
     Funtion checks for avialable keys in keyspace.
@@ -22,6 +23,7 @@ def get_or_update(gainers=True):
         tstamp = int(time.mktime(tstamp.timetuple()))
         # Save timestamp for reference
         r.set(tstamp_key, tstamp)
+        # Expire keys in 5 minutes
         r.expire(tstamp_key, 300)
         for entry in data['data']:
             entry_key = '{}:{}:{}'.format(tstamp_key, tstamp, entry['symbol'])

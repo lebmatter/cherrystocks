@@ -13,6 +13,9 @@ def periodic_crawler():
     2) Celelry with Redis backed.
 
     To run the scheduler in a different thread,
-
+    huey_consumer.py tasks.huey -k process -w 4
     '''
-    get_or_update()
+
+    # Update gainers and losers
+    get_or_update(True)
+    get_or_update(False)
