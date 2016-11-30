@@ -39,7 +39,7 @@ def get_or_update():
 
             r.expire(entry_key, 300)
         return data['data']
-    elif 'tstsamp' in keys:
+    elif 'tstamp' in keys:
         last_tstamp = r.get('tstamp')
         entry_keys = keys.remove(last_tstamp)
         data = []
