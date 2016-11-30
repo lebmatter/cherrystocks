@@ -13,8 +13,9 @@ class CherryStocks(object):
 class CherryStocksWebService(object):
 
     @cherrypy.tools.accept(media='text/plain')
-    def GET(self):
-        data = get_or_update()
+    def GET(self, type='gainers'):
+        g = True if type == 'gainers' else False
+        data = get_or_update(g)
         return json.dumps(data)
 
 

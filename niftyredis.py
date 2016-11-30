@@ -5,7 +5,7 @@ import time
 
 r = redis.Redis(host='localhost', port=6379, db=0)
 
-def get_or_update():
+def get_or_update(gainers=True):
     '''
     Funtion checks for avialable keys in keyspace.
     1) If key not found:
@@ -14,16 +14,17 @@ def get_or_update():
     2) If key is found:
         get data from cache with timestamp Key
     '''
-    if not r.exists('tstamp'):
+    tstamp_key = 'gtstamp' if gainers else 'ltstamp'
+    if not r.exists(tstamp_key):
         # empty keys means cache has cleared.
-        data = get_niftyfifty()
+        data = get_niftyfifty(gainers)
         tstamp = datetime.datetime.strptime(data['time'], "%b %d, %Y %H:%M:%S")
         tstamp = int(time.mktime(tstamp.timetuple()))
         # Save timestamp for reference
-        r.set('tstamp', tstamp)
-        r.expire('tstamp', 300)
+        r.set(tstamp_key, tstamp)
+        r.expire(tstamp_key, 300)
         for entry in data['data']:
-            entry_key = '{}:{}'.format(tstamp, entry['symbol'])
+            entry_key = '{}:{}:{}'.format(tstamp_key, tstamp, entry['symbol'])
             r.hmset(
                 entry_key, {
                     'symbol': entry_key,
@@ -40,8 +41,8 @@ def get_or_update():
         print "Data from Crawling."
         return data['data']
     else:
-        last_tstamp = r.get('tstamp')
-        entry_keys = r.keys('{}*'.format(last_tstamp))
+        last_tstamp = r.get(tstamp_key)
+        entry_keys = r.keys('{}:{}*'.format(tstamp_key, last_tstamp))
         print 'Current keys in cahce are: ', entry_keys
         data = []
         for entry_key in entry_keys:
