@@ -8,10 +8,12 @@ $(document).ready(function () {
         $(".gtype").css('border-bottom', 'none');
         $("#"+gtype).css('border-bottom', '1px dashed white');
 
-        entries = JSON.parse(data);
+        var parsed_data = JSON.parse(data);
+        var entries = parsed_data['data'];
+        var tstamp = parsed_data['tstamp'];
+        $('#tstamp').text(tstamp);
         $containerdiv.html('');
         $.each(entries, function (index, value) {
-            console.log(value);
             var $cdiv = $("<div>", {
                 "class": "card"
             });
@@ -43,7 +45,7 @@ $(document).ready(function () {
             $cfooter2.append(
                     '<div class="valtext">LOW '+value['lowPrice']+' - '+value['highPrice']+' HIGH</div>'
                 ).append(
-                    '<div class="valtext">VALUE '+value['tradedQuantity']+' | TRADE QTY '+value['turnoverInLakhs']+' </div>'
+                    '<div class="valtext">TRADE QTY '+value['tradedQuantity']+' | TURNOVER '+value['turnoverInLakhs']+' </div>'
                 )
             $cdiv.append($ctop);
             $cfooter.append($cfooterl).append($cfooterr);

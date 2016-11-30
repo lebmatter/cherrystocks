@@ -39,7 +39,7 @@ def get_or_update(gainers=True):
 
             r.expire(entry_key, 300)
         print "Data from Crawling."
-        return data['data']
+        return tstamp, data['data']
     else:
         last_tstamp = r.get(tstamp_key)
         entry_keys = r.keys('{}:{}*'.format(tstamp_key, last_tstamp))
@@ -48,7 +48,7 @@ def get_or_update(gainers=True):
         for entry_key in entry_keys:
             data.append(r.hgetall(entry_key))
         print "Data from Redis Cache"
-        return data
+        return last_tstamp, data
 
 
 if __name__ == '__main__':
